@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('people', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->unsignedBigInteger('id_interno');
             $table->string('apellido_paterno');
             $table->string('apellido_materno');
             $table->timestamps();

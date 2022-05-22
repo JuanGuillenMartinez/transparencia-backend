@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('subdepartment_id')->constrained();
             $table->string('serie');
+            $table->enum('estatus', ['prestado', 'disponible']);
             $table->timestamps();
         });
     }
