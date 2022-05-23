@@ -41,7 +41,7 @@ class Folder extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function folderCovers()
+    public function folderCover()
     {
         return $this->hasOne('App\Models\FolderCover', 'folder_id', 'id');
     }

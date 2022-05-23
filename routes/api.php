@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\OfficeController;
+use App\Http\Controllers\SubdepartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('/offices', OfficeController::class);
+Route::apiResource('/subdepartments', SubdepartmentController::class);
+Route::get('/subdepartments/{id}/groups', [SubdepartmentController::class, 'folderGroups']);
