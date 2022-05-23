@@ -19,7 +19,7 @@ class FolderGroupResource extends JsonResource
         return [
             'id' => $this->id,
             'serie' => $this->serie,
-            'status' => $this->estatus,
+            'estatus' => $this->estatus,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'subdepartment' => new SubdepartmentResource($this->subdepartment),
