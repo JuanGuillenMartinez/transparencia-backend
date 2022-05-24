@@ -34,7 +34,7 @@ class FolderGroup extends Model
      *
      * @var array
      */
-    protected $fillable = ['subdepartment_id','serie'];
+    protected $fillable = ['subdepartment_id','serie', 'estatus'];
 
 
     /**

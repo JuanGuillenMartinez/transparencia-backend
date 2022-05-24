@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\JsonResponse;
-use App\Http\Resources\Folder\FolderResource;
-use App\Models\FolderGroup;
 use Illuminate\Http\Request;
 
-class FolderGroupController extends Controller
+class FolderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,12 +24,7 @@ class FolderGroupController extends Controller
      */
     public function store(Request $request)
     {
-        $folderGroup = FolderGroup::create([
-            'subdepartment_id' => $request->subdepartment_id,
-            'serie' => $request->serie,
-            'estatus' => $request->estatus,
-        ]);
-        return $folderGroup;
+        //
     }
 
     /**
@@ -67,10 +59,5 @@ class FolderGroupController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function folders($folderGroupId) {
-        $folderGroup = FolderGroup::find($folderGroupId);
-        return JsonResponse::sendResponse(FolderResource::collection($folderGroup->folders));
     }
 }
