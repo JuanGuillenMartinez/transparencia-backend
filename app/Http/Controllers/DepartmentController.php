@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\JsonResponse;
-use App\Http\Resources\FolderGroup\FolderGroupResource;
-use App\Models\FolderGroup;
-use App\Models\Subdepartment;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
-class SubdepartmentController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,12 +26,12 @@ class SubdepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        $subdepartment = Subdepartment::create([
-            'department_id' => $request->department_id,
+        $department = Department::create([
+            'office_id' => $request->office_id,
             'nombre' => $request->nombre,
             'identificador_interno' => $request->identificador_interno,
         ]);
-        return JsonResponse::sendResponse($subdepartment);
+        return JsonResponse::sendResponse($department);
     }
 
     /**
@@ -68,11 +66,5 @@ class SubdepartmentController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function folderGroups($id)
-    {
-        $folderGroups = FolderGroup::where('subdepartment_id', $id)->get();
-        return JsonResponse::sendResponse(FolderGroupResource::collection($folderGroups));
     }
 }

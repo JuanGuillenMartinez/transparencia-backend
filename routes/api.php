@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\FolderGroupController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\SubdepartmentController;
@@ -22,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('/offices', OfficeController::class);
+Route::apiResource('/departments', DepartmentController::class);
 Route::apiResource('/subdepartments', SubdepartmentController::class);
 Route::get('/subdepartments/{id}/groups', [SubdepartmentController::class, 'folderGroups']);
 Route::get('/folder-groups/{id}/folders', [FolderGroupController::class, 'folders']);
