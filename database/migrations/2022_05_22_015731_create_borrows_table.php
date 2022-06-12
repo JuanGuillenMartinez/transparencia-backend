@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('folder_group_id')->constrained();
             $table->foreignId('person_id')->constrained();
             $table->dateTime('fecha_devolucion')->nullable();
-            $table->enum('estatus', ['disponible', 'prestado'])->default('disponible');
+            $table->enum('estatus', ['disponible', 'prestado', 'devuelto'])->default('disponible');
             $table->timestamps();
         });
     }
