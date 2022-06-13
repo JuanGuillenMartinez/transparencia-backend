@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Helpers\JsonResponse;
 use App\Http\Resources\Folder\FolderResource;
+use App\Models\Folder;
 use App\Models\FolderGroup;
 use Illuminate\Http\Request;
+
+use function GuzzleHttp\Promise\all;
 
 class FolderGroupController extends Controller
 {
@@ -16,7 +19,8 @@ class FolderGroupController extends Controller
      */
     public function index()
     {
-        //
+        $folderGroups = FolderGroup::all();
+        return JsonResponse::sendResponse($folderGroups);
     }
 
     /**
@@ -72,5 +76,11 @@ class FolderGroupController extends Controller
     public function folders($folderGroupId) {
         $folderGroup = FolderGroup::find($folderGroupId);
         return JsonResponse::sendResponse(FolderResource::collection($folderGroup->folders));
+    }
+
+    public function available() 
+    {
+        $folderGroup = FolderGroup::where('estatus', 'disponible')->get();
+        return JsonResponse::sendResponse($folderGroup);
     }
 }

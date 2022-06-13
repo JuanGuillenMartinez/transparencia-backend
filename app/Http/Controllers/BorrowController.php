@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\JsonResponse;
 use App\Http\Resources\Borrow\BorrowResource;
 use App\Models\Borrow;
+use App\Models\FolderGroup;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -29,7 +30,12 @@ class BorrowController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $borrow = Borrow::create([
+            "folder_group_id" => $request->folder_group_id,
+            "person_id" => $request->person_id,
+            "estatus" => "prestado",
+        ]);
+        return JsonResponse::sendResponse($borrow);
     }
 
     /**
@@ -52,7 +58,12 @@ class BorrowController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $borrow = Borrow::find($id);
+        $borrow->folder_group_id = $request->folder_group_id;
+        $borrow->person_id = $request->person_id;
+        $borrow->estatus = $request->estatus;
+        $borrow->save();
+        return JsonResponse::sendResponse($borrow);
     }
 
     /**
@@ -69,8 +80,23 @@ class BorrowController extends Controller
     public function returnFolder($id)
     {
         $borrow = Borrow::find($id);
+        $folderGroup = FolderGroup::find($borrow->folder_group_id);
+        $folderGroup->estatus = 'disponible';
+        $folderGroup->save();
         $borrow->estatus = "devuelto";
         $borrow->fecha_devolucion = Carbon::now();
+        return $borrow->save();
+    }
+
+    public function relendFolder($id)
+    {
+        $borrow = Borrow::find($id);
+        $folderGroup = FolderGroup::find($borrow->folder_group_id);
+        $folderGroup->estatus = 'prestado';
+        $folderGroup->save();
+        $borrow->estatus = "prestado";
+        $borrow->created_at = Carbon::now();
+        $borrow->fecha_devolucion = null;
         return $borrow->save();
     }
 }

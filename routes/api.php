@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('/offices', OfficeController::class);
 Route::apiResource('/borrows', BorrowController::class);
 Route::get('/borrows/{id}/return', [BorrowController::class, 'returnFolder']);
+Route::get('/borrows/{id}/relend', [BorrowController::class, 'relendFolder']);
 Route::apiResource('/persons', PersonController::class);
 Route::apiResource('/departments', DepartmentController::class);
 Route::apiResource('/subdepartments', SubdepartmentController::class);
@@ -35,3 +36,4 @@ Route::apiResource('/folder-groups', FolderGroupController::class);
 Route::apiResource('/folders', FolderController::class);
 Route::get('/subdepartments/{id}/groups', [SubdepartmentController::class, 'folderGroups']);
 Route::get('/folder-groups/{id}/folders', [FolderGroupController::class, 'folders']);
+Route::get('/available/folder-groups', [FolderGroupController::class, 'available']);
