@@ -14,6 +14,20 @@ class FolderCoverResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            "area" => $this->area,
+            "asunto" => $this->asunto,
+            "fecha_inicio" => $this->fecha_inicio,
+            "fecha_terminacion" => $this->fecha_terminacion,
+            "valor_documental" => $this->valor_documental,
+            "conservacion_tramite" => $this->conservacion_tramite,
+            "conservacion_concentracion" => $this->conservacion_concentracion,
+            "conservacion_acceso" => $this->conservacion_acceso,
+            "conservacion_desclasificacion" => $this->conservacion_desclasificacion,
+            "clasificacion_informacion" => $this->clasificacion_informacion,
+            "expediente" => $this->expediente,
+            "localizacion" => $this->localizacion,
+        ];
     }
 }
