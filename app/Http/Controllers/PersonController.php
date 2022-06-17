@@ -27,7 +27,13 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $person = Person::create([
+            'nombre' => $request->nombre,
+            'apellido_paterno' => $request->apellido_paterno,
+            'apellido_materno' => $request->apellido_materno,
+            'id_interno' => $request->id_interno,
+        ]);
+        return JsonResponse::sendResponse($person);
     }
 
     /**
@@ -50,7 +56,15 @@ class PersonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $person = Person::find($id);
+        $person->nombre = $request->nombre;
+        $person->apellido_paterno = $request->apellido_paterno;
+        $person->apellido_materno = $request->apellido_materno;
+        $person->id_interno = $request->id_interno;
+        if ($person->save()) {
+            return JsonResponse::sendResponse($person);
+        }
+        return JsonResponse::sendError();
     }
 
     /**
@@ -61,6 +75,8 @@ class PersonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $person = Person::find($id);
+        $result = $person->delete();
+        return JsonResponse::sendResponse($result);
     }
 }
