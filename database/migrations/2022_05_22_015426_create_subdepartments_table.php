@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('subdepartments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('department_id')->constrained();
+            $table->foreignId('department_id')->constrained()->cascadeOnDelete();
             $table->string('nombre');
             $table->string('identificador_interno');
             $table->timestamps();

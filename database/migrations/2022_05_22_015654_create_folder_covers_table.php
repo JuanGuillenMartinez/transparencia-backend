@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('folder_covers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('folder_id')->constrained();
+            $table->foreignId('folder_id')->constrained()->cascadeOnDelete();
             $table->string('area');
             $table->string('asunto');
             $table->date('fecha_inicio');

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('folder_groups', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('subdepartment_id')->constrained();
+            $table->foreignId('subdepartment_id')->constrained()->cascadeOnDelete();
             $table->string('serie');
             $table->enum('estatus', ['prestado', 'disponible']);
             $table->timestamps();

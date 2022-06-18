@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('borrows', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('folder_group_id')->constrained();
-            $table->foreignId('person_id')->constrained();
+            $table->foreignId('folder_group_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('person_id')->constrained()->cascadeOnDelete();
             $table->dateTime('fecha_devolucion')->nullable();
             $table->enum('estatus', ['disponible', 'prestado', 'devuelto'])->default('disponible');
             $table->timestamps();

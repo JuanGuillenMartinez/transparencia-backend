@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('folders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('folder_group_id')->constrained();
+            $table->foreignId('folder_group_id')->constrained()->cascadeOnDelete();
             $table->string('legajo');
             $table->string('subserie');
             $table->timestamps();
