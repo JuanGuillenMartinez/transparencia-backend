@@ -53,7 +53,10 @@ class OfficeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $office = Office::find($id);
+        $office->nombre = $request->nombre;
+        $office->save();
+        return JsonResponse::sendResponse($office);
     }
 
     /**
