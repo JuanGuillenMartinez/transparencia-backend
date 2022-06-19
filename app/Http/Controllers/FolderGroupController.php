@@ -59,7 +59,11 @@ class FolderGroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $folderGroup = FolderGroup::updateOrCreate(['id' => $id], [
+            'serie' => $request->serie,
+            'estatus' => $request->estatus,
+        ]);
+        return JsonResponse::sendResponse($folderGroup);
     }
 
     /**
@@ -70,15 +74,18 @@ class FolderGroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $folderGroup = FolderGroup::find($id);
+        $folderGroup->delete();
+        return JsonResponse::sendResponse('Eliminado correctamente');
     }
 
-    public function folders($folderGroupId) {
+    public function folders($folderGroupId)
+    {
         $folderGroup = FolderGroup::find($folderGroupId);
         return JsonResponse::sendResponse(FolderResource::collection($folderGroup->folders));
     }
 
-    public function available() 
+    public function available()
     {
         $folderGroup = FolderGroup::where('estatus', 'disponible')->get();
         return JsonResponse::sendResponse($folderGroup);
