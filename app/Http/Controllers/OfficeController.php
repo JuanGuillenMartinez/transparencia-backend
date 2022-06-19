@@ -67,6 +67,8 @@ class OfficeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $office = Office::find($id);
+        $office->delete();
+        return JsonResponse::sendResponse('Eliminado correctamente');
     }
 }
