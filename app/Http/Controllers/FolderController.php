@@ -6,6 +6,7 @@ use App\Helpers\JsonResponse;
 use App\Models\Folder;
 use App\Models\FolderCover;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class FolderController extends Controller
 {
@@ -72,7 +73,30 @@ class FolderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $folder = Folder::updateOrCreate(['id' => $id], [
+            'folder_group_id' => $request->folder_group_id,
+            'legajo' => $request->legajo,
+            'subserie' => $request->subserie,
+        ]);
+
+        if (isset($folder)) {
+            $folderCover = FolderCover::updateOrCreate(['id' => $folder->folderCover->id], [
+                'folder_id' => $folder->id,
+                'area' => $request->area,
+                'asunto' => $request->asunto,
+                'fecha_inicio' => $request->fecha_inicio,
+                'fecha_terminacion' => $request->fecha_terminacion,
+                'valor_documental' => $request->valor_documental,
+                'conservacion_tramite' => $request->conservacion_tramite,
+                'conservacion_concentracion' => $request->conservacion_concentracion,
+                'conservacion_acceso' => $request->conservacion_acceso,
+                'conservacion_desclasificacion' => $request->conservacion_desclasificacion,
+                'clasificacion_informacion' => $request->clasificacion_informacion,
+                'expediente' => $request->expediente,
+                'localizacion' => $request->localizacion,
+            ]);
+        }
+        return JsonResponse::sendResponse($folderCover);
     }
 
     /**
@@ -83,6 +107,8 @@ class FolderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $folder = Folder::find($id);
+        $folder->delete();
+        return JsonResponse::sendResponse('Eliminado correctamente');
     }
 }
